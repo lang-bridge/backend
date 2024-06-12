@@ -1,6 +1,9 @@
 package key
 
-import "platform/internal/translations/entity/project"
+import (
+	"context"
+	"platform/internal/translations/entity/project"
+)
 
 type ID int64
 type TagID int64
@@ -25,5 +28,25 @@ type Key struct {
 	ProjectID project.ID
 	Name      string
 	Platforms []Platform
-	Tags      []Tag
+	Tags      []TagID
+}
+
+type CreateTag struct {
+	ProjectID project.ID
+	Value     string
+}
+
+type TagsRepository interface {
+	CreateTags(ctx context.Context, projectID project.ID, tags []string) ([]Tag, error)
+}
+
+type CreateKeyParam struct {
+	ProjectID project.ID
+	Name      string
+	Platforms []Platform
+	Tags      []TagID
+}
+
+type KeysRepository interface {
+	CreateKey(ctx context.Context, key CreateKeyParam) (Key, error)
 }

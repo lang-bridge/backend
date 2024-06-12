@@ -1,0 +1,21 @@
+version: 2
+
+sql:
+  - schema: "./migrations"
+    queries: "internal/repository/postgres/queries"
+    engine: "postgresql"
+    gen:
+      go:
+        emit_db_tags: true
+        out: "internal/repository/postgres/gen"
+        sql_package: postgresql
+
+#  # this is useful when you need some queries you don't need in main code
+#  - schema: "./migrations"
+#    queries: "test/dbfixture/sql"
+#    engine: "postgresql"
+#    gen:
+#      go:
+#        emit_db_tags: true
+#        out: "test/dbfixture/gen"
+#        sql_package: postgresql
