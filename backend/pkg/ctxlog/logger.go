@@ -3,6 +3,7 @@ package ctxlog
 import (
 	"context"
 	"log/slog"
+	"os"
 )
 
 type ctxMarker struct{}
@@ -15,6 +16,13 @@ func WithLogger(ctx context.Context, logger *slog.Logger) context.Context {
 
 func Logger(ctx context.Context) *slog.Logger {
 	logger, _ := ctx.Value(ctxMarkerKey).(*slog.Logger)
+	if logger == nil {
+		if _, has := os.LookupEnv("PROD"); has {
+			panic("logger is not set in context")
+		}
+		_, _ = os.Stderr.WriteString("logger is not set in context\n")
+		return slog.Default()
+	}
 	return logger
 }
 
@@ -36,4 +44,8 @@ func Warn(ctx context.Context, message string, args ...slog.Attr) {
 
 func Error(ctx context.Context, message string, args ...slog.Attr) {
 	Logger(ctx).ErrorContext(ctx, message, args)
+}
+
+func Log(ctx context.Context, level slog.Level, message string, args ...slog.Attr) {
+	Logger(ctx).LogAttrs(ctx, level, message, args...)
 }

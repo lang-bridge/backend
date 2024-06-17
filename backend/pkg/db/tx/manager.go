@@ -5,8 +5,10 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/jmoiron/sqlx"
 	"go.uber.org/multierr"
 	"platform/pkg/ctxlog"
+	"platform/pkg/db/dbtx"
 )
 
 type Manager interface {
@@ -18,25 +20,25 @@ type ctxMarker struct {
 
 var ctxKey = ctxMarker{}
 
-func Tx(ctx context.Context) *sql.Tx {
-	tx, _ := ctx.Value(ctxKey).(*sql.Tx)
+func Tx(ctx context.Context) *sqlx.Tx {
+	tx, _ := ctx.Value(ctxKey).(*sqlx.Tx)
 	return tx
 }
 
-func WithTx(ctx context.Context, tx *sql.Tx) context.Context {
+func WithTx(ctx context.Context, tx *sqlx.Tx) context.Context {
 	return context.WithValue(ctx, ctxKey, tx)
 }
 
-func NewManager(db *sql.DB) Manager {
+func NewManager(db dbtx.DBTX) Manager {
 	return &txManager{db: db}
 }
 
 type txManager struct {
-	db *sql.DB
+	db dbtx.DBTX
 }
 
 func (t *txManager) Execute(ctx context.Context, txFunc func(context.Context) error, opts ...sql.TxOptions) (errTx error) {
-	tx, err := t.db.BeginTx(ctx, chainOptions(opts))
+	tx, err := t.db.BeginTxx(ctx, chainOptions(opts))
 	if err != nil {
 		return fmt.Errorf("couldn't begin transaction: %w", err)
 	}

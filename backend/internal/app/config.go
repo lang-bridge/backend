@@ -12,8 +12,9 @@ import (
 type Config struct {
 	fx.Out
 
-	Http   http.Config        `yaml:"http"`
-	Logger infra.LoggerConfig `yaml:"logger"`
+	Http     http.Config        `yaml:"http"`
+	Logger   infra.LoggerConfig `yaml:"logger"`
+	Database infra.DbConfig     `yaml:"database"`
 }
 
 func ReadConfig() (Config, error) {

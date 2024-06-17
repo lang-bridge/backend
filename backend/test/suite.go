@@ -13,6 +13,7 @@ import (
 	"platform/internal/translations/service/keys"
 	"platform/pkg/ctxlog"
 	"testing"
+	"time"
 )
 
 func RunTest(t *testing.T, r interface{}) {
@@ -20,6 +21,16 @@ func RunTest(t *testing.T, r interface{}) {
 		Logger: infra.LoggerConfig{
 			Level:  slog.LevelDebug,
 			Format: "console",
+		},
+		Database: infra.DbConfig{
+			Host:            "localhost",
+			Port:            5432,
+			User:            "postgres",
+			Password:        "postgres",
+			Database:        "langbridge",
+			MaxOpenConns:    10,
+			MaxIdleConns:    2,
+			ConnMaxIdleTime: time.Minute,
 		},
 	}
 	fxApp := fxtest.New(t, api.Module, fx.Provide(newStub), fx.Replace(cfg), fx.Invoke(r))

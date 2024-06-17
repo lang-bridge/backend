@@ -14,7 +14,7 @@ func (s *svc) CreateKey(ctx context.Context, params CreateKeyParam) (KeyView, er
 		copy(tags, params.ExistedTags)
 
 		if len(params.NewTags) > 0 {
-			newTags, err := s.tagsRepo.CreateTags(ctx, params.ProjectID, params.NewTags)
+			newTags, err := s.tagsRepo.EnsureTags(ctx, params.ProjectID, params.NewTags)
 			if err != nil {
 				return fmt.Errorf("failed to create tags: %w", err)
 			}

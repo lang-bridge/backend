@@ -1,0 +1,10 @@
+services:
+  migrator:
+    container_name: "migrator-langbridge"
+    image: gomicro/goose:3.7.0
+    volumes:
+      - ./../../migrations:/migrations
+    command: "goose postgres \"host=db-langbridge user=postgres password=postgres dbname=langbridge sslmode=disable\" up"
+    depends_on:
+      postgres:
+        condition: service_healthy

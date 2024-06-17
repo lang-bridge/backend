@@ -31,13 +31,8 @@ type Key struct {
 	Tags      []TagID
 }
 
-type CreateTag struct {
-	ProjectID project.ID
-	Value     string
-}
-
 type TagsRepository interface {
-	CreateTags(ctx context.Context, projectID project.ID, tags []string) ([]Tag, error)
+	EnsureTags(ctx context.Context, projectID project.ID, tags []string) ([]Tag, error)
 }
 
 type CreateKeyParam struct {
