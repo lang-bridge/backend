@@ -10,5 +10,8 @@ var Module = fx.Module("repository/postgres",
 	fx.Provide(func(db dbtx.DBTX) *gen.Queries {
 		return gen.New(db)
 	}),
-	fx.Provide(NewTagsRepository),
+	fx.Provide(
+		NewTagsRepository,
+		NewKeysRepository,
+	),
 )

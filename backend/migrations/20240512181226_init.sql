@@ -52,6 +52,8 @@ ALTER TABLE keys
         FOREIGN KEY (project_id)
             REFERENCES projects (id);
 
+CREATE UNIQUE INDEX uidx__keys__name ON keys (project_id, name);
+
 -- CREATE INDEX idx__keys__tags ON keys USING GIN (tags);
 -- CREATE INDEX idx__keys__name ON keys USING GIN (project_id, (to_tsvector('english', name)));
 

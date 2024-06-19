@@ -12,7 +12,7 @@ services:
       POSTGRES_DB: langbridge
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - langbridge-pg-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
@@ -22,5 +22,5 @@ services:
       retries: 7
 
 volumes:
-  pg-data:
+  langbridge-pg-data:
     driver: local
