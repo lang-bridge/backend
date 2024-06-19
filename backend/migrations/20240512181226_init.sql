@@ -57,5 +57,21 @@ CREATE UNIQUE INDEX uidx__keys__name ON keys (project_id, name);
 -- CREATE INDEX idx__keys__tags ON keys USING GIN (tags);
 -- CREATE INDEX idx__keys__name ON keys USING GIN (project_id, (to_tsvector('english', name)));
 
+CREATE TABLE translations
+(
+    id         BIGINT GENERATED ALWAYS AS IDENTITY,
+    key_id     BIGINT NOT NULL,
+    language   VARCHAR NOT NULL,
+    value      TEXT NOT NULL
+        CONSTRAINT check__translations__value CHECK ( value <> '' ),
+    CONSTRAINT pk__translations PRIMARY KEY (id)
+);
+
+ALTER TABLE translations
+    ADD CONSTRAINT fk__translations__keys
+        FOREIGN KEY (key_id)
+            REFERENCES keys (id);
+
+CREATE UNIQUE INDEX uidx__translations__key_id__language ON translations (key_id, language);
 
 -- +goose StatementEnd

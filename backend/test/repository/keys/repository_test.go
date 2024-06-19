@@ -8,7 +8,7 @@ import (
 	"platform/pkg/db/dbtx"
 	"platform/test"
 	"platform/test/ptesting"
-	"platform/test/ptesting/generator"
+	"platform/test/ptesting/fixture"
 	"strings"
 	"testing"
 )
@@ -16,7 +16,7 @@ import (
 func TestCreateKey(t *testing.T) {
 	test.RunTest(t, func(rep key.KeysRepository, db dbtx.DBTX) {
 		ptesting.ForAll(t)(func(t *testing.T, gen *ptesting.Gen) {
-			prj := generator.NewProject(t, gen, db)
+			prj := fixture.NewProject(t, gen, db)
 			keyName := strings.ToLower(gen.NextString(5, 10))
 
 			createdKey, err := rep.CreateKey(context.Background(), key.CreateKeyParam{

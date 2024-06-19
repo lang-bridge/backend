@@ -5,4 +5,6 @@ tasks:
     cmd: 'docker run --rm -v $(pwd):/src -w /src sqlc/sqlc:1.26.0 generate'
 
   run-env:
-    cmd: 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml up --remove-orphans'
+    cmds:
+      - 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml down -v'
+      - 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml up --remove-orphans'

@@ -9,6 +9,9 @@ sql:
         emit_db_tags: true
         out: "internal/repository/postgres/gen"
         sql_package: postgresql
+        overrides:
+          - column: "translations.language"
+            go_type: "golang.org/x/text/language.Tag"
 
 #  # this is useful when you need some queries you don't need in main code
 #  - schema: "./migrations"

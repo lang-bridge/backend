@@ -7,6 +7,8 @@ package gen
 import (
 	"database/sql/driver"
 	"fmt"
+
+	"golang.org/x/text/language"
 )
 
 type Platform string
@@ -70,4 +72,11 @@ type KeyTag struct {
 type Project struct {
 	ID   int64  `db:"id"`
 	Name string `db:"name"`
+}
+
+type Translation struct {
+	ID       int64        `db:"id"`
+	KeyID    int64        `db:"key_id"`
+	Language language.Tag `db:"language"`
+	Value    string       `db:"value"`
 }
