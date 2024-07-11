@@ -6,6 +6,7 @@ import (
 	"platform/internal/app"
 	"platform/internal/infra"
 	"platform/internal/repository/postgres"
+	"platform/internal/translations/service/keys"
 )
 
 var Module = fx.Module("api",
@@ -13,4 +14,7 @@ var Module = fx.Module("api",
 	infra.Module,
 	http.Module,
 	postgres.Module,
+
+	// domain
+	keys.Module,
 )

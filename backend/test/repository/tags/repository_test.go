@@ -17,7 +17,7 @@ func TestRepeatableInsert(t *testing.T) {
 	test.RunTest(t, func(rep key.TagsRepository, db dbtx.DBTX) {
 		ptesting.ForAll(t)(func(t *testing.T, gen *ptesting.Gen) {
 			prj := fixture.NewProject(t, gen, db)
-			newTags := ptesting.Array(3, gen, func(gen *ptesting.Gen) string {
+			newTags := ptesting.Array(gen, 3, func(gen *ptesting.Gen) string {
 				return gen.NextString(3, 10)
 			})
 

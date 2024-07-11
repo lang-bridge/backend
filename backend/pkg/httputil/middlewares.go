@@ -4,12 +4,17 @@ import (
 	"log/slog"
 	"net/http"
 	"platform/pkg/ctxlog"
+	"platform/pkg/httputil/httperr"
 	"runtime/debug"
 )
 
 func WrapError(handler func(http.ResponseWriter, *http.Request) error) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if err := handler(w, r); err != nil {
+			if httperr.IsBadRequest(err) {
+				http.Error(w, err.Error(), http.StatusBadRequest)
+				return
+			}
 			ctxlog.Error(r.Context(), "request finished with unhandled error", ctxlog.ErrorAttr(err))
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}

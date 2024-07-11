@@ -54,7 +54,7 @@ func (g *Gen) NextLanguage() language.Tag {
 }
 
 func (g *Gen) NextTranslation(keyID key.ID) translation.Value {
-	terms := Array(g.NextInt(1, 10), g, func(g *Gen) string {
+	terms := Array(g, g.NextInt(1, 10), func(g *Gen) string {
 		return g.NextString(2, 30)
 	})
 	return translation.Value{
@@ -64,7 +64,7 @@ func (g *Gen) NextTranslation(keyID key.ID) translation.Value {
 	}
 }
 
-func Array[T any](size int, g *Gen, f func(*Gen) T) []T {
+func Array[T any](g *Gen, size int, f func(*Gen) T) []T {
 	var res = make([]T, size)
 	for i := 0; i < size; i++ {
 		res[i] = f(g)

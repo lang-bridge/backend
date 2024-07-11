@@ -8,6 +8,7 @@ import (
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/service/keys"
 	"platform/pkg/httputil"
+	"platform/pkg/httputil/httperr"
 	"strconv"
 )
 
@@ -37,6 +38,9 @@ func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 	if err := httputil.DecodeJSON(r, &req); err != nil {
 		return fmt.Errorf("failed to parse request body: %w", err)
 	}
+	if err := req.Validate(); err != nil {
+		return httperr.BadRequest(fmt.Errorf("invalid request: %w", err))
+	}
 
 	view, err := s.svc.CreateKey(r.Context(), keys.CreateKeyParam{
 		ProjectID:   projectID,
@@ -64,12 +68,28 @@ type CreateKeyRequest struct {
 	Translates  []keys.Translate `json:"translates"`
 }
 
-type CreateKeyResponse struct {
-	ID key.ID `json:"key_id"`
+func (c *CreateKeyRequest) Validate() error {
+	if c.Name == "" {
+		return fmt.Errorf("name is required")
+	}
+	if len(c.Platforms) == 0 {
+		return fmt.Errorf("platforms is required")
+	}
+	if len(c.Translates) == 0 {
+		return fmt.Errorf("translates is required")
+	}
+	langs := map[string]any{}
+	for _, tr := range c.Translates {
+		if _, ok := langs[tr.Language.String()]; ok {
+			return fmt.Errorf("duplicated language: %s", tr.Language.String())
+		}
+		langs[tr.Language.String()] = ""
+	}
+	return nil
 }
 
-func (c CreateKeyResponse) Render(_ http.ResponseWriter, _ *http.Request) error {
-	return nil
+type CreateKeyResponse struct {
+	ID key.ID `json:"key_id"`
 }
 
 func getProjectID(req *http.Request) (project.ID, error) {
