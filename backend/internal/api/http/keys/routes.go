@@ -7,6 +7,7 @@ import (
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/service/keys"
+	"platform/pkg/ctxlog"
 	"platform/pkg/httputil"
 	"platform/pkg/httputil/httperr"
 	"strconv"
@@ -56,6 +57,8 @@ func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 	resp := CreateKeyResponse{
 		ID: view.Key.ID,
 	}
+
+	ctxlog.Error(r.Context(), "test sentry error")
 
 	return httputil.RenderJSON(w, http.StatusOK, resp)
 }
