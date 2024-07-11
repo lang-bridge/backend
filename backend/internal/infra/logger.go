@@ -1,6 +1,7 @@
 package infra
 
 import (
+	slogotel "github.com/remychantenay/slog-otel"
 	"log/slog"
 	"os"
 )
@@ -22,5 +23,6 @@ func NewLogger(config LoggerConfig) *slog.Logger {
 			Level: config.Level,
 		})
 	}
+	handler = slogotel.New(handler, slogotel.WithNoTraceEvents(true))
 	return slog.New(handler)
 }

@@ -7,6 +7,7 @@ import (
 	"os"
 	"platform/internal/api/http"
 	"platform/internal/infra"
+	"platform/internal/repository/postgres"
 )
 
 type Config struct {
@@ -14,7 +15,7 @@ type Config struct {
 
 	Http     http.Config        `yaml:"http"`
 	Logger   infra.LoggerConfig `yaml:"logger"`
-	Database infra.DbConfig     `yaml:"database"`
+	Database postgres.DbConfig  `yaml:"database"`
 }
 
 func ReadConfig() (Config, error) {

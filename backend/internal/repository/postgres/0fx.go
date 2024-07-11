@@ -7,6 +7,7 @@ import (
 )
 
 var Module = fx.Module("repository/postgres",
+	fx.Provide(NewDB),
 	fx.Provide(func(db dbtx.DBTX) *gen.Queries {
 		return gen.New(db)
 	}),

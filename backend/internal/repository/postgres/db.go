@@ -1,4 +1,4 @@
-package infra
+package postgres
 
 import (
 	"context"
@@ -6,12 +6,11 @@ import (
 	"fmt"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
-	"github.com/jackc/pgx/v5/tracelog"
 	"github.com/jmoiron/sqlx"
+	"github.com/pgx-contrib/pgxotel"
 	"go.uber.org/fx"
 	"log/slog"
 	"platform/pkg/ctxlog"
-	"platform/pkg/db/dblog"
 	"platform/pkg/db/dbtx"
 	"platform/pkg/db/tx"
 	"time"
@@ -38,10 +37,11 @@ func NewDB(cfg DbConfig, logger *slog.Logger, lc fx.Lifecycle) (dbtx.DBTX, *sql.
 	if err != nil {
 		return nil, nil, fmt.Errorf("could not parse postgres connection string: %w", err)
 	}
-	pgConfig.Tracer = &tracelog.TraceLog{
-		Logger:   dblog.NewLogger(),
-		LogLevel: tracelog.LogLevelDebug,
-	}
+	//pgConfig.Tracer = &tracelog.TraceLog{
+	//	Logger:   dblog.NewLogger(),
+	//	LogLevel: tracelog.LogLevelDebug,
+	//}
+	pgConfig.Tracer = pgxotel.NewTracer("pgx")
 
 	connStr := stdlib.RegisterConnConfig(pgConfig)
 

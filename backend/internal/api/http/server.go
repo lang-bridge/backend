@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-chi/chi/v5"
+	"github.com/riandyrn/otelchi"
 	slogchi "github.com/samber/slog-chi"
 	"log/slog"
 	"net/http"
@@ -54,8 +55,13 @@ func NewServer(cfg Config, router chi.Router) (*Server, error) {
 
 func NewRouter(logger *slog.Logger, registrars ...Registerer) chi.Router {
 	r := chi.NewRouter()
+
 	r.Use(httputil.WithLogger(logger))
+
+	r.Use(otelchi.Middleware("api", otelchi.WithChiRoutes(r)))
+
 	r.Use(slogchi.New(logger))
+
 	r.Use(httputil.Recovery)
 
 	for _, registrar := range registrars {

@@ -7,6 +7,7 @@ import (
 	"platform/internal/app"
 	"platform/internal/app/api"
 	"platform/internal/infra"
+	"platform/internal/repository/postgres"
 	"testing"
 	"time"
 )
@@ -17,7 +18,7 @@ func RunTest(t *testing.T, r interface{}) {
 			Level:  slog.LevelDebug,
 			Format: "console",
 		},
-		Database: infra.DbConfig{
+		Database: postgres.DbConfig{
 			Host:            "localhost",
 			Port:            5432,
 			User:            "postgres",

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/getsentry/sentry-go"
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/require"
 	"net/http"
@@ -16,6 +17,7 @@ import (
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"
 	"testing"
+	"time"
 )
 
 func TestCreateKey(t *testing.T) {
@@ -66,6 +68,7 @@ func TestCreateKey(t *testing.T) {
 			require.Equal(t, 200, resp.StatusCode)
 		})
 	})
+	sentry.Flush(time.Minute)
 }
 
 func TestCreateKey_BadRequest(t *testing.T) {
