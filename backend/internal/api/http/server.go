@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	sentryhttp "github.com/getsentry/sentry-go/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/riandyrn/otelchi"
 	slogchi "github.com/samber/slog-chi"
@@ -59,6 +60,8 @@ func NewRouter(logger *slog.Logger, registrars ...Registerer) chi.Router {
 	r.Use(httputil.WithLogger(logger))
 
 	r.Use(otelchi.Middleware("api", otelchi.WithChiRoutes(r)))
+
+	r.Use(sentryhttp.New(sentryhttp.Options{}).Handle)
 
 	r.Use(slogchi.New(logger))
 

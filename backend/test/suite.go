@@ -1,6 +1,7 @@
 package test
 
 import (
+	"github.com/stretchr/testify/require"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxtest"
 	"log/slog"
@@ -13,6 +14,7 @@ import (
 )
 
 func RunTest(t *testing.T, r interface{}) {
+	require.NoError(t, infra.Init())
 	cfg := app.Config{
 		Logger: infra.LoggerConfig{
 			Level:  slog.LevelDebug,

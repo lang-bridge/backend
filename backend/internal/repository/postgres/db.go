@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
+	"github.com/jackc/pgx/v5/tracelog"
 	"github.com/jmoiron/sqlx"
 	"github.com/pgx-contrib/pgxotel"
 	"go.uber.org/fx"
 	"log/slog"
 	"platform/pkg/ctxlog"
+	"platform/pkg/db/dblog"
 	"platform/pkg/db/dbtx"
 	"platform/pkg/db/tx"
 	"time"
@@ -23,9 +25,10 @@ type DbConfig struct {
 	Password string `yaml:"password"`
 	Database string `yaml:"database"`
 
-	MaxOpenConns    int           `yaml:"maxOpenConns"`
-	MaxIdleConns    int           `yaml:"maxIdleConns"`
-	ConnMaxIdleTime time.Duration `yaml:"connMaxIdleTime"`
+	MaxOpenConns    int           `yaml:"max_open_conns"`
+	MaxIdleConns    int           `yaml:"max_idle_conns"`
+	ConnMaxIdleTime time.Duration `yaml:"conn_max_idle_time"`
+	LogTracing      bool          `yaml:"log_tracing"`
 }
 
 func (c DbConfig) ConnectionString() string {
@@ -37,11 +40,14 @@ func NewDB(cfg DbConfig, logger *slog.Logger, lc fx.Lifecycle) (dbtx.DBTX, *sql.
 	if err != nil {
 		return nil, nil, fmt.Errorf("could not parse postgres connection string: %w", err)
 	}
-	//pgConfig.Tracer = &tracelog.TraceLog{
-	//	Logger:   dblog.NewLogger(),
-	//	LogLevel: tracelog.LogLevelDebug,
-	//}
-	pgConfig.Tracer = pgxotel.NewTracer("pgx")
+	if cfg.LogTracing {
+		pgConfig.Tracer = &tracelog.TraceLog{
+			Logger:   dblog.NewLogger(),
+			LogLevel: tracelog.LogLevelDebug,
+		}
+	} else {
+		pgConfig.Tracer = pgxotel.NewTracer("pgx")
+	}
 
 	connStr := stdlib.RegisterConnConfig(pgConfig)
 

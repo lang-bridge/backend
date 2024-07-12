@@ -26,13 +26,14 @@ func NewLogger(config LoggerConfig) *slog.Logger {
 		})
 	}
 
-	sentryHandler := slogsentry.Option{Level: slog.LevelError}.NewSentryHandler()
-
-	handler = slogCombine{
-		loggers: []slog.Handler{
-			handler,
-			sentryHandler,
-		},
+	if _, withSentry := os.LookupEnv("SENTRY_DSN"); withSentry {
+		sentryHandler := slogsentry.Option{Level: slog.LevelWarn}.NewSentryHandler()
+		handler = slogCombine{
+			loggers: []slog.Handler{
+				handler,
+				sentryHandler,
+			},
+		}
 	}
 
 	handler = slogotel.New(handler, slogotel.WithNoTraceEvents(true))
