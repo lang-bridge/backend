@@ -2,10 +2,12 @@ package dblog
 
 import (
 	"context"
-	"github.com/jackc/pgx/v5/tracelog"
 	"log/slog"
-	"platform/pkg/ctxlog"
 	"sort"
+
+	"github.com/jackc/pgx/v5/tracelog"
+
+	"platform/pkg/ctxlog"
 )
 
 var _ tracelog.Logger = (*slogLogger)(nil)
@@ -14,8 +16,7 @@ func NewLogger() tracelog.Logger {
 	return &slogLogger{}
 }
 
-type slogLogger struct {
-}
+type slogLogger struct{}
 
 func (s *slogLogger) Log(ctx context.Context, level tracelog.LogLevel, msg string, data map[string]any) {
 	var keys []string

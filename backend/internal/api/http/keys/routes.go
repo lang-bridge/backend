@@ -2,15 +2,17 @@ package keys
 
 import (
 	"fmt"
-	"github.com/go-chi/chi/v5"
 	"net/http"
+	"strconv"
+
+	"github.com/go-chi/chi/v5"
+
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/service/keys"
 	"platform/pkg/ctxlog"
 	"platform/pkg/httputil"
 	"platform/pkg/httputil/httperr"
-	"strconv"
 )
 
 type Router struct {

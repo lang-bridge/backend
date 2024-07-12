@@ -4,11 +4,15 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+	"time"
+
 	"github.com/getsentry/sentry-go"
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/require"
-	"net/http"
-	"net/http/httptest"
+
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/entity/translation"
 	"platform/internal/translations/service/keys"
@@ -16,8 +20,6 @@ import (
 	"platform/test"
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"
-	"testing"
-	"time"
 )
 
 func TestCreateKey(t *testing.T) {
@@ -118,6 +120,5 @@ func TestCreateKey_BadRequest(t *testing.T) {
 			require.NoError(t, err)
 			require.Equal(t, 400, resp.StatusCode)
 		})
-
 	})
 }

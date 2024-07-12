@@ -2,8 +2,10 @@ package http
 
 import (
 	"context"
-	"go.uber.org/fx"
 	"log/slog"
+
+	"go.uber.org/fx"
+
 	"platform/internal/api/http/keys"
 	"platform/pkg/ctxlog"
 )

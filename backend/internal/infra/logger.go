@@ -2,10 +2,11 @@ package infra
 
 import (
 	"context"
-	slogotel "github.com/remychantenay/slog-otel"
-	slogsentry "github.com/samber/slog-sentry/v2"
 	"log/slog"
 	"os"
+
+	slogotel "github.com/remychantenay/slog-otel"
+	slogsentry "github.com/samber/slog-sentry/v2"
 )
 
 type LoggerConfig struct {
@@ -67,7 +68,7 @@ func (s slogCombine) Handle(ctx context.Context, record slog.Record) error {
 }
 
 func (s slogCombine) WithAttrs(attrs []slog.Attr) slog.Handler {
-	var loggers = make([]slog.Handler, len(s.loggers))
+	loggers := make([]slog.Handler, len(s.loggers))
 	for i, logger := range s.loggers {
 		loggers[i] = logger.WithAttrs(attrs)
 	}
@@ -75,7 +76,7 @@ func (s slogCombine) WithAttrs(attrs []slog.Attr) slog.Handler {
 }
 
 func (s slogCombine) WithGroup(name string) slog.Handler {
-	var loggers = make([]slog.Handler, len(s.loggers))
+	loggers := make([]slog.Handler, len(s.loggers))
 	for i, logger := range s.loggers {
 		loggers[i] = logger.WithGroup(name)
 	}

@@ -21,6 +21,6 @@ func BadRequest(err error) error {
 }
 
 func IsBadRequest(err error) bool {
-	var target = new(badRequest)
+	target := new(badRequest)
 	return errors.As(err, &target)
 }

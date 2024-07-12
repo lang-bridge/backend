@@ -2,9 +2,11 @@ package app
 
 import (
 	"fmt"
+	"os"
+
 	"go.uber.org/fx"
 	"gopkg.in/yaml.v3"
-	"os"
+
 	"platform/internal/api/http"
 	"platform/internal/infra"
 	"platform/internal/repository/postgres"

@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+
 	"github.com/jmoiron/sqlx"
 	"go.uber.org/multierr"
 	"platform/pkg/ctxlog"
@@ -15,8 +16,7 @@ type Manager interface {
 	Execute(ctx context.Context, txFunc func(context.Context) error, opts ...sql.TxOptions) error
 }
 
-type ctxMarker struct {
-}
+type ctxMarker struct{}
 
 var ctxKey = ctxMarker{}
 

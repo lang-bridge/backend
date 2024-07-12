@@ -2,13 +2,15 @@ package fixture
 
 import (
 	"context"
-	"github.com/stretchr/testify/require"
 	"log/slog"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+
 	"platform/internal/repository/postgres/gen"
 	"platform/pkg/ctxlog"
 	"platform/pkg/db/dbtx"
 	"platform/test/ptesting"
-	"testing"
 )
 
 const createProject = `

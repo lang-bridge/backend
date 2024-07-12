@@ -2,6 +2,8 @@ package infra
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/getsentry/sentry-go"
 	sentryotel "github.com/getsentry/sentry-go/otel"
 	"go.opentelemetry.io/otel"
@@ -9,7 +11,7 @@ import (
 	"go.opentelemetry.io/otel/sdk/metric"
 	"go.opentelemetry.io/otel/sdk/trace"
 	"go.uber.org/fx"
-	"os"
+
 	"platform/pkg/db/tx"
 )
 
@@ -21,7 +23,7 @@ var Module = fx.Module("infra",
 func Init() error {
 	dsn, withSentry := os.LookupEnv("SENTRY_DSN")
 
-	var propagators = []propagation.TextMapPropagator{
+	propagators := []propagation.TextMapPropagator{
 		propagation.TraceContext{},
 		propagation.Baggage{},
 	}

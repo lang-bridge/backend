@@ -39,7 +39,7 @@ func ForAll(t *testing.T, opts ...Option) func(f func(*testing.T, *Gen)) {
 		opt(o)
 	}
 
-	var seed = o.seed
+	seed := o.seed
 	return func(f func(*testing.T, *Gen)) {
 		for i := 0; i < o.tests; i++ {
 			t.Run(strconv.Itoa(i), func(t *testing.T) {
@@ -66,7 +66,7 @@ func Single(t *testing.T, opts ...Option) func(f func(*testing.T, *Gen)) {
 	}
 	o.tests = 1
 
-	var seed = o.seed
+	seed := o.seed
 	return func(f func(*testing.T, *Gen)) {
 		t.Run(strconv.Itoa(0), func(t *testing.T) {
 			t.Logf("seed = %d", seed)
@@ -80,5 +80,4 @@ func Single(t *testing.T, opts ...Option) func(f func(*testing.T, *Gen)) {
 			f(t, gen)
 		})
 	}
-
 }

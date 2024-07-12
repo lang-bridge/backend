@@ -4,18 +4,20 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log/slog"
+	"time"
+
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/jackc/pgx/v5/tracelog"
 	"github.com/jmoiron/sqlx"
 	"github.com/pgx-contrib/pgxotel"
 	"go.uber.org/fx"
-	"log/slog"
+
 	"platform/pkg/ctxlog"
 	"platform/pkg/db/dblog"
 	"platform/pkg/db/dbtx"
 	"platform/pkg/db/tx"
-	"time"
 )
 
 type DbConfig struct {

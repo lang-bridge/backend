@@ -2,6 +2,9 @@ package keys
 
 import (
 	"context"
+	"strings"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
@@ -9,8 +12,6 @@ import (
 	"platform/test"
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"
-	"strings"
-	"testing"
 )
 
 func TestCreateKey(t *testing.T) {

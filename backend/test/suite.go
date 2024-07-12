@@ -1,16 +1,18 @@
 package test
 
 import (
+	"log/slog"
+	"testing"
+	"time"
+
 	"github.com/stretchr/testify/require"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxtest"
-	"log/slog"
+
 	"platform/internal/app"
 	"platform/internal/app/api"
 	"platform/internal/infra"
 	"platform/internal/repository/postgres"
-	"testing"
-	"time"
 )
 
 func RunTest(t *testing.T, r interface{}) {

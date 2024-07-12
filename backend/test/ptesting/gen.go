@@ -1,11 +1,12 @@
 package ptesting
 
 import (
+	"strings"
+
 	"golang.org/x/text/language"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/entity/translation"
-	"strings"
 )
 
 const alpha = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
@@ -65,7 +66,7 @@ func (g *Gen) NextTranslation(keyID key.ID) translation.Value {
 }
 
 func Array[T any](g *Gen, size int, f func(*Gen) T) []T {
-	var res = make([]T, size)
+	res := make([]T, size)
 	for i := 0; i < size; i++ {
 		res[i] = f(g)
 	}
@@ -73,7 +74,7 @@ func Array[T any](g *Gen, size int, f func(*Gen) T) []T {
 }
 
 func Elems[T any](g *Gen, min, max int, elems ...T) []T {
-	var arr = make([]T, len(elems))
+	arr := make([]T, len(elems))
 	copy(arr, elems)
 	g.r.Shuffle(len(arr), func(i, j int) {
 		arr[i], arr[j] = arr[j], arr[i]

@@ -3,11 +3,14 @@ package key
 import (
 	"context"
 	"errors"
+
 	"platform/internal/translations/entity/project"
 )
 
-type ID int64
-type TagID int64
+type (
+	ID    int64
+	TagID int64
+)
 
 type Platform string
 
@@ -43,9 +46,7 @@ type CreateKeyParam struct {
 	Tags      []TagID
 }
 
-var (
-	ErrKeyAlreadyExists = errors.New("key already exists")
-)
+var ErrKeyAlreadyExists = errors.New("key already exists")
 
 type KeysRepository interface {
 	CreateKey(ctx context.Context, key CreateKeyParam) (Key, error)

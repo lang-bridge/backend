@@ -4,12 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log/slog"
+	"net/http"
+
 	sentryhttp "github.com/getsentry/sentry-go/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/riandyrn/otelchi"
 	slogchi "github.com/samber/slog-chi"
-	"log/slog"
-	"net/http"
+
 	"platform/pkg/ctxlog"
 	"platform/pkg/httputil"
 )

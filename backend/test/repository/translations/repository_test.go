@@ -2,6 +2,8 @@ package translations
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"golang.org/x/text/language"
 	"platform/internal/translations/entity/key"
@@ -11,7 +13,6 @@ import (
 	"platform/test"
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"
-	"testing"
 )
 
 func TestUpsertTranslations(t *testing.T) {

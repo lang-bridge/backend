@@ -3,12 +3,13 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"strings"
+
 	"platform/internal/repository/postgres/gen"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/pkg/ctxlog"
 	"platform/pkg/db/dbtx"
-	"strings"
 )
 
 type TagsRepository struct {
@@ -42,7 +43,7 @@ func (t *TagsRepository) EnsureTags(ctx context.Context, projectID project.ID, t
 	}
 	defer rows.Close()
 
-	var allTags = map[string]string{}
+	allTags := map[string]string{}
 	for _, tag := range tags {
 		allTags[strings.ToLower(tag)] = tag
 	}
@@ -60,7 +61,7 @@ func (t *TagsRepository) EnsureTags(ctx context.Context, projectID project.ID, t
 
 	if len(allTags) > 0 {
 		ctxlog.Warn(ctx, "some tags were not created, because they already exist in the database")
-		var keys = make([]string, 0, len(allTags))
+		keys := make([]string, 0, len(allTags))
 		for k := range allTags {
 			keys = append(keys, k)
 		}
