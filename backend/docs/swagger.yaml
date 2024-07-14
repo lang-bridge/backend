@@ -1,4 +1,3 @@
-basePath: /api/v1
 definitions:
   internal_api_http_keys.Translate:
     properties:
@@ -40,20 +39,17 @@ definitions:
           $ref: '#/definitions/internal_api_http_keys.Translate'
         type: array
     type: object
-externalDocs:
-  description: OpenAPI
-  url: https://swagger.io/resources/open-api/
-host: localhost:8080
+host: api.langbridge.io
 info:
   contact:
-    email: support@swagger.io
-    name: API Support
-    url: http://www.swagger.io/support
+    email: support@langbridge.io
+    name: LangBridge Support
+    url: http://langbridge.io/support
   description: This is a sample server celler server.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Swagger Example API
+  title: LangBridge API
   version: "1.0"
 paths:
   /api/v1/projects/{projectID}/keys:
@@ -78,7 +74,4 @@ paths:
       summary: Create key with translates
       tags:
       - keys
-securityDefinitions:
-  BasicAuth:
-    type: basic
 swagger: "2.0"
