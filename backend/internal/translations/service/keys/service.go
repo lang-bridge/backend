@@ -24,8 +24,8 @@ type CreateKeyParam struct {
 }
 
 type Translate struct {
-	Language language.Tag `json:"language"`
-	Value    string       `json:"value"`
+	Language language.Tag
+	Value    string
 }
 
 type KeyView struct {

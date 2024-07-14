@@ -2,6 +2,7 @@ package keys
 
 import (
 	"fmt"
+	"golang.org/x/text/language"
 	"net/http"
 	"strconv"
 
@@ -23,14 +24,21 @@ func NewRouter(svc keys.Service) *Router {
 	return &Router{svc: svc}
 }
 
-func (r *Router) Register(router chi.Router) {
+func (s *Router) Register(router chi.Router) {
 	router.Route("/api/v1/projects/{projectID}/keys", func(router chi.Router) {
-		router.Post("/", httputil.WrapError(r.CreateKey))
+		router.Post("/", httputil.WrapError(s.CreateKey))
 	})
 }
 
 // CreateKey creates key into project
-// /api/v1/projects/{projectID}/keys
+//
+//	@Summary	Create key with translates
+//	@Tags		keys
+//	@Accept		json
+//	@Produce	json
+//	@Param		projectID	path	int					true	"Project ID"
+//	@Param		request		body	CreateKeyRequest	true	"Create key request"
+//	@Router		/api/v1/projects/{projectID}/keys [post]
 func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 	projectID, err := getProjectID(r)
 	if err != nil {
@@ -45,13 +53,21 @@ func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 		return httperr.BadRequest(fmt.Errorf("invalid request: %w", err))
 	}
 
+	var translate = make([]keys.Translate, len(req.Translates))
+	for i, tr := range req.Translates {
+		translate[i] = keys.Translate{
+			Language: tr.Language,
+			Value:    tr.Value,
+		}
+	}
+
 	view, err := s.svc.CreateKey(r.Context(), keys.CreateKeyParam{
 		ProjectID:   projectID,
 		Name:        req.Name,
 		Platforms:   req.Platforms,
 		ExistedTags: req.ExistedTags,
 		NewTags:     req.NewTags,
-		Translate:   req.Translates,
+		Translate:   translate,
 	})
 	if err != nil {
 		return fmt.Errorf("failed to create key: %w", err)
@@ -66,11 +82,16 @@ func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 }
 
 type CreateKeyRequest struct {
-	Name        string           `json:"name"`
-	Platforms   []key.Platform   `json:"platforms"`
-	ExistedTags []key.TagID      `json:"existedTags"`
-	NewTags     []string         `json:"newTags"`
-	Translates  []keys.Translate `json:"translates"`
+	Name        string         `json:"name"`
+	Platforms   []key.Platform `json:"platforms"`
+	ExistedTags []key.TagID    `json:"existedTags"`
+	NewTags     []string       `json:"newTags"`
+	Translates  []Translate    `json:"translates"`
+}
+
+type Translate struct {
+	Language language.Tag `json:"language" swaggertype:"string"`
+	Value    string       `json:"value"`
 }
 
 func (c *CreateKeyRequest) Validate() error {
