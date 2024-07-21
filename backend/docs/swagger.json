@@ -1,7 +1,6 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server celler server.",
         "title": "LangBridge API",
         "contact": {
             "name": "LangBridge Support",
@@ -14,7 +13,7 @@
         },
         "version": "1.0"
     },
-    "host": "api.langbridge.io",
+    "host": "https://api.langbridge.io",
     "paths": {
         "/api/v1/projects/{projectID}/keys": {
             "post": {
@@ -46,7 +45,14 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Created key",
+                        "schema": {
+                            "$ref": "#/definitions/keys.CreateKeyResponse"
+                        }
+                    }
+                }
             }
         }
     },
@@ -106,6 +112,14 @@
                     "items": {
                         "$ref": "#/definitions/internal_api_http_keys.Translate"
                     }
+                }
+            }
+        },
+        "keys.CreateKeyResponse": {
+            "type": "object",
+            "properties": {
+                "key_id": {
+                    "type": "integer"
                 }
             }
         }

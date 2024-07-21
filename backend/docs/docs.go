@@ -53,7 +53,14 @@ const docTemplate = `{
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Created key",
+                        "schema": {
+                            "$ref": "#/definitions/keys.CreateKeyResponse"
+                        }
+                    }
+                }
             }
         }
     },
@@ -115,6 +122,14 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "keys.CreateKeyResponse": {
+            "type": "object",
+            "properties": {
+                "key_id": {
+                    "type": "integer"
+                }
+            }
         }
     }
 }`
@@ -122,11 +137,11 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "api.langbridge.io",
+	Host:             "https://api.langbridge.io",
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "LangBridge API",
-	Description:      "This is a sample server celler server.",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

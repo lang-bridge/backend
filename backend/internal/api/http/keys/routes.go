@@ -36,9 +36,10 @@ func (s *Router) Register(router chi.Router) {
 //	@Tags		keys
 //	@Accept		json
 //	@Produce	json
-//	@Param		projectID	path	int					true	"Project ID"
-//	@Param		request		body	CreateKeyRequest	true	"Create key request"
 //	@Router		/api/v1/projects/{projectID}/keys [post]
+//	@Param		projectID	path		int					true	"Project ID"
+//	@Param		request		body		CreateKeyRequest	true	"Create key request"
+//	@Success	200			{object}	CreateKeyResponse "Created key"
 func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 	projectID, err := getProjectID(r)
 	if err != nil {

@@ -39,13 +39,17 @@ definitions:
           $ref: '#/definitions/internal_api_http_keys.Translate'
         type: array
     type: object
-host: api.langbridge.io
+  keys.CreateKeyResponse:
+    properties:
+      key_id:
+        type: integer
+    type: object
+host: https://api.langbridge.io
 info:
   contact:
     email: support@langbridge.io
     name: LangBridge Support
     url: http://langbridge.io/support
-  description: This is a sample server celler server.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -70,7 +74,11 @@ paths:
           $ref: '#/definitions/keys.CreateKeyRequest'
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: Created key
+          schema:
+            $ref: '#/definitions/keys.CreateKeyResponse'
       summary: Create key with translates
       tags:
       - keys

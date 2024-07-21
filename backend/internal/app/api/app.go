@@ -31,14 +31,14 @@ var App = fx.Options(
 
 // New returns a new instance of the App
 //
-//	@title						LangBridge API
-//	@version					1.0
-//	@contact.name				LangBridge Support
-//	@contact.url				http://langbridge.io/support
-//	@contact.email				support@langbridge.io
-//	@license.name				Apache 2.0
-//	@license.url				http://www.apache.org/licenses/LICENSE-2.0.html
-//	@host						https://api.langbridge.io
+//	@title			LangBridge API
+//	@version		1.0
+//	@contact.name	LangBridge Support
+//	@contact.url	http://langbridge.io/support
+//	@contact.email	support@langbridge.io
+//	@license.name	Apache 2.0
+//	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
+//	@host			https://api.langbridge.io
 func New() *fx.App {
 	return fx.New(App)
 }
