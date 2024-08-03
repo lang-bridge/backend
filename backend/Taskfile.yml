@@ -1,10 +1,13 @@
 version: '3'
 
 tasks:
+  default:
+    cmd: 'task --list-all'
+
   gen-sql:
     cmd: 'docker run --rm -v $(pwd):/src -w /src sqlc/sqlc:1.26.0 generate'
 
   run-env:
     cmds:
-      - 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml down -v'
-      - 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml up --remove-orphans'
+      - 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml -f deployments/local/ory/kratos.docker-compose.yml down -v'
+      - 'docker-compose -f deployments/local/postgres.docker-compose.yml -f deployments/local/migrator.docker-compose.yml -f deployments/local/ory/kratos.docker-compose.yml up --remove-orphans'
