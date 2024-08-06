@@ -19,8 +19,8 @@ var Module = fx.Module("api",
 	keys.Module,
 )
 
-var Invoke = fx.Invoke(
-	http.RunServer,
+var Invoke = fx.Options(
+	http.Invoke,
 )
 
 // App is a set of invokes and modules

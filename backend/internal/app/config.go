@@ -30,7 +30,7 @@ func ReadConfig() (Config, error) {
 	if err != nil {
 		return cfg, fmt.Errorf("failed to read config file: %w", err)
 	}
-	err = yaml.Unmarshal(content, &cfg)
+	err = yaml.Unmarshal([]byte(os.ExpandEnv(string(content))), &cfg)
 	if err != nil {
 		return cfg, fmt.Errorf("failed to unmarshal config: %w", err)
 	}

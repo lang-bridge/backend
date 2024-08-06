@@ -1,5 +1,5 @@
 # IntelliJ project files
-.idea
+.idea/
 *.iml
 ./out
 ./gen
@@ -51,3 +51,4 @@ Temporary Items
 .apdisk
 
 test-report.out.json
+bin/

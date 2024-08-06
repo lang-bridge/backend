@@ -2,10 +2,10 @@ version: '3.9'
 
 services:
   postgres:
-    image: postgres:16.3-bullseye
+    image: ${POSTGRES_IMAGE}
     restart: always
     shm_size: 128mb
-    container_name: db-langbridge
+    container_name: "postgres-${COMPOSE_PROJECT_NAME}"
     environment:
       PGUSER: postgres
       POSTGRES_USER: postgres
@@ -13,7 +13,7 @@ services:
       POSTGRES_MULTIPLE_DATABASES: langbridge,ory
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - langbridge-pg-data:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
       - ./scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
     ports:
       - "5432:5432"
@@ -24,5 +24,5 @@ services:
       retries: 7
 
 volumes:
-  langbridge-pg-data:
+  pg-data:
     driver: local

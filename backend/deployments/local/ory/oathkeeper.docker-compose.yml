@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  oathkeeper:
+    image: ${ORY_OATHKEEPER_IMAGE}
+    container_name: oathkeeper-${COMPOSE_PROJECT_NAME}
+    ports:
+      - 8080:4455
+      - "4456:4456"
+    volumes:
+      - type: bind
+        source: ./ory/config/oathkeeper
+        target: /etc/config/oathkeeper
+    command: serve proxy -c "/etc/config/oathkeeper/config.yml"
+    environment:
+      - LOG_LEVEL=debug
+    restart: on-failure

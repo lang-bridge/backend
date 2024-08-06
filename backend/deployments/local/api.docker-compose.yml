@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: ./../../
+      dockerfile: Dockerfile
+      args:
+        - GOLANG_IMAGE=${GOLANG_IMAGE}
+        - APP_BASE_IMAGE=${APP_BASE_IMAGE}
+    container_name: "api-${COMPOSE_PROJECT_NAME}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - type: bind
+        source: ./config.yaml
+        target: /etc/config/api/config.yaml
+    environment:
+      - CONFIG_PATH=/etc/config/api/config.yaml
+      - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}
+    command: "./api"
+    ports:
+      - "8080:8080"
