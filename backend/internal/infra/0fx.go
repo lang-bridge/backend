@@ -33,7 +33,7 @@ func Init() error {
 
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagators...))
 
-	tracerOptions := []trace.TracerProviderOption{}
+	var tracerOptions []trace.TracerProviderOption
 	if withSentry {
 		tracerOptions = append(tracerOptions, trace.WithSpanProcessor(sentryotel.NewSentrySpanProcessor()))
 	}

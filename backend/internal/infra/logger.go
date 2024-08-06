@@ -2,6 +2,7 @@ package infra
 
 import (
 	"context"
+	"io"
 	"log/slog"
 	"os"
 
@@ -15,14 +16,18 @@ type LoggerConfig struct {
 }
 
 func NewLogger(config LoggerConfig) *slog.Logger {
+	return NewLoggerWithWriter(config, os.Stdout)
+}
+
+func NewLoggerWithWriter(config LoggerConfig, w io.Writer) *slog.Logger {
 	var handler slog.Handler
 	switch config.Format {
 	case "json":
-		handler = slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		handler = slog.NewJSONHandler(w, &slog.HandlerOptions{
 			Level: config.Level,
 		})
 	default:
-		handler = slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		handler = slog.NewTextHandler(w, &slog.HandlerOptions{
 			Level: config.Level,
 		})
 	}

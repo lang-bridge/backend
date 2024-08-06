@@ -10,7 +10,7 @@
   authenticators:
     - handler: cookie_session
   mutators:
-    - handler: noop
+    - handler: header
   authorizer:
     handler: allow
   errors:

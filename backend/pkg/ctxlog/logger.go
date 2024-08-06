@@ -31,21 +31,27 @@ func ErrorAttr(err error) slog.Attr {
 }
 
 func Debug(ctx context.Context, message string, args ...slog.Attr) {
-	Logger(ctx).DebugContext(ctx, message, args)
+	Log(ctx, slog.LevelDebug, message, args...)
 }
 
 func Info(ctx context.Context, message string, args ...slog.Attr) {
-	Logger(ctx).InfoContext(ctx, message, args)
+	Log(ctx, slog.LevelInfo, message, args...)
 }
 
 func Warn(ctx context.Context, message string, args ...slog.Attr) {
-	Logger(ctx).WarnContext(ctx, message, args)
+	Log(ctx, slog.LevelWarn, message, args...)
 }
 
 func Error(ctx context.Context, message string, args ...slog.Attr) {
-	Logger(ctx).ErrorContext(ctx, message, args)
+	Log(ctx, slog.LevelError, message, args...)
 }
 
 func Log(ctx context.Context, level slog.Level, message string, args ...slog.Attr) {
 	Logger(ctx).LogAttrs(ctx, level, message, args...)
 }
+
+//func castArgs(args ...slog.Attr) []any {
+//	return lo.Map(args, func(item slog.Attr, _ int) any {
+//		return item
+//	})
+//}
