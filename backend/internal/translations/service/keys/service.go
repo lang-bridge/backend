@@ -2,12 +2,12 @@ package keys
 
 import (
 	"context"
+	"platform/internal/pkg/db/tx"
 
 	"golang.org/x/text/language"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/entity/translation"
-	"platform/pkg/db/tx"
 )
 
 type Service interface {

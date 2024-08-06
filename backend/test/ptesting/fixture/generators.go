@@ -3,13 +3,13 @@ package fixture
 import (
 	"context"
 	"log/slog"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/db/dbtx"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
 	"platform/internal/repository/postgres/gen"
-	"platform/pkg/ctxlog"
-	"platform/pkg/db/dbtx"
 	"platform/test/ptesting"
 )
 

@@ -2,13 +2,13 @@ package keys
 
 import (
 	"context"
+	"platform/internal/pkg/db/dbtx"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
-	"platform/pkg/db/dbtx"
 	"platform/test"
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"

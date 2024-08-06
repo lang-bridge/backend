@@ -4,11 +4,11 @@ import (
 	"context"
 	"log/slog"
 	"platform/internal/api/http/hello"
+	"platform/internal/pkg/ctxlog"
 
 	"go.uber.org/fx"
 
 	"platform/internal/api/http/keys"
-	"platform/pkg/ctxlog"
 )
 
 var Module = fx.Module("http",

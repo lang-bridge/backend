@@ -3,13 +3,13 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/db/dbtx"
 	"strings"
 
 	"platform/internal/repository/postgres/gen"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
-	"platform/pkg/ctxlog"
-	"platform/pkg/db/dbtx"
 )
 
 type TagsRepository struct {

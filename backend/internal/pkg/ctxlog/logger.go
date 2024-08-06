@@ -2,6 +2,7 @@ package ctxlog
 
 import (
 	"context"
+	"github.com/samber/lo"
 	"log/slog"
 	"os"
 )
@@ -50,8 +51,13 @@ func Log(ctx context.Context, level slog.Level, message string, args ...slog.Att
 	Logger(ctx).LogAttrs(ctx, level, message, args...)
 }
 
-//func castArgs(args ...slog.Attr) []any {
-//	return lo.Map(args, func(item slog.Attr, _ int) any {
-//		return item
-//	})
-//}
+func With(ctx context.Context, args ...slog.Attr) context.Context {
+	logger := Logger(ctx).With(castArgs(args...)...)
+	return WithLogger(ctx, logger)
+}
+
+func castArgs(args ...slog.Attr) []any {
+	return lo.Map(args, func(item slog.Attr, _ int) any {
+		return item
+	})
+}

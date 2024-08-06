@@ -2,6 +2,7 @@ package translations
 
 import (
 	"context"
+	"platform/internal/pkg/db/dbtx"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -9,7 +10,6 @@ import (
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/entity/translation"
-	"platform/pkg/db/dbtx"
 	"platform/test"
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"

@@ -5,11 +5,11 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/db/dbtx"
 
 	"github.com/jmoiron/sqlx"
 	"go.uber.org/multierr"
-	"platform/pkg/ctxlog"
-	"platform/pkg/db/dbtx"
 )
 
 type Manager interface {

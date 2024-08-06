@@ -3,10 +3,9 @@ package httputil
 import (
 	"log/slog"
 	"net/http"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/httputil/httperr"
 	"runtime/debug"
-
-	"platform/pkg/ctxlog"
-	"platform/pkg/httputil/httperr"
 )
 
 func WrapError(handler func(http.ResponseWriter, *http.Request) error) http.HandlerFunc {

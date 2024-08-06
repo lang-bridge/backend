@@ -2,8 +2,8 @@ package postgres
 
 import (
 	"go.uber.org/fx"
+	"platform/internal/pkg/db/dbtx"
 	"platform/internal/repository/postgres/gen"
-	"platform/pkg/db/dbtx"
 )
 
 var Module = fx.Module("repository/postgres",

@@ -3,6 +3,7 @@ package infra
 import (
 	"fmt"
 	"os"
+	"platform/internal/pkg/db/tx"
 
 	"github.com/getsentry/sentry-go"
 	sentryotel "github.com/getsentry/sentry-go/otel"
@@ -11,8 +12,6 @@ import (
 	"go.opentelemetry.io/otel/sdk/metric"
 	"go.opentelemetry.io/otel/sdk/trace"
 	"go.uber.org/fx"
-
-	"platform/pkg/db/tx"
 )
 
 var Module = fx.Module("infra",

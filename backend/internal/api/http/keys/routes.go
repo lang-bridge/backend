@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"golang.org/x/text/language"
 	"net/http"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/httputil"
+	"platform/internal/pkg/httputil/httperr"
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
@@ -11,9 +14,6 @@ import (
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/service/keys"
-	"platform/pkg/ctxlog"
-	"platform/pkg/httputil"
-	"platform/pkg/httputil/httperr"
 )
 
 type Router struct {

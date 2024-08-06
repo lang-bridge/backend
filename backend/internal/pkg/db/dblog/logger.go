@@ -3,11 +3,10 @@ package dblog
 import (
 	"context"
 	"log/slog"
+	"platform/internal/pkg/ctxlog"
 	"sort"
 
 	"github.com/jackc/pgx/v5/tracelog"
-
-	"platform/pkg/ctxlog"
 )
 
 var _ tracelog.Logger = (*slogLogger)(nil)

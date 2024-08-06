@@ -5,11 +5,11 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"platform/internal/pkg/db/dbtx"
 
 	"platform/internal/repository/postgres/gen"
 	"platform/internal/translations/entity/key"
 	"platform/internal/translations/entity/project"
-	"platform/pkg/db/dbtx"
 )
 
 type KeysRepository struct {

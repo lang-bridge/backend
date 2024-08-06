@@ -5,6 +5,10 @@ import (
 	"database/sql"
 	"fmt"
 	"log/slog"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/db/dblog"
+	"platform/internal/pkg/db/dbtx"
+	"platform/internal/pkg/db/tx"
 	"time"
 
 	"github.com/jackc/pgx/v5"
@@ -13,11 +17,6 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/pgx-contrib/pgxotel"
 	"go.uber.org/fx"
-
-	"platform/pkg/ctxlog"
-	"platform/pkg/db/dblog"
-	"platform/pkg/db/dbtx"
-	"platform/pkg/db/tx"
 )
 
 type DbConfig struct {

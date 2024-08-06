@@ -3,10 +3,10 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"platform/internal/pkg/db/dbtx"
 
 	"platform/internal/repository/postgres/gen"
 	"platform/internal/translations/entity/translation"
-	"platform/pkg/db/dbtx"
 )
 
 type TranslationsRepository struct {

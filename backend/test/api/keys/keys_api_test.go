@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"platform/internal/pkg/db/dbtx"
 	"testing"
 	"time"
 
@@ -16,7 +17,6 @@ import (
 	"platform/internal/translations/entity/project"
 	"platform/internal/translations/entity/translation"
 	"platform/internal/translations/service/keys"
-	"platform/pkg/db/dbtx"
 	"platform/test"
 	"platform/test/ptesting"
 	"platform/test/ptesting/fixture"

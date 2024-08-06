@@ -6,14 +6,13 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"platform/internal/pkg/ctxlog"
+	"platform/internal/pkg/httputil"
 
 	sentryhttp "github.com/getsentry/sentry-go/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/riandyrn/otelchi"
 	slogchi "github.com/samber/slog-chi"
-
-	"platform/pkg/ctxlog"
-	"platform/pkg/httputil"
 )
 
 type Server struct {
@@ -68,6 +67,8 @@ func NewRouter(logger *slog.Logger, registrars ...Registerer) chi.Router {
 	r.Use(slogchi.New(logger))
 
 	r.Use(httputil.Recovery)
+
+	r.Use(httputil.WithMetaCtx)
 
 	for _, registrar := range registrars {
 		registrar.Register(r)
