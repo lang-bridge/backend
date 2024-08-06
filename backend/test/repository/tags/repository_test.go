@@ -2,9 +2,10 @@ package tags
 
 import (
 	"context"
-	"platform/internal/pkg/db/dbtx"
 	"strings"
 	"testing"
+
+	"platform/internal/pkg/db/dbtx"
 
 	"github.com/stretchr/testify/require"
 	"platform/internal/translations/entity/key"

@@ -2,8 +2,9 @@ package translations
 
 import (
 	"context"
-	"platform/internal/pkg/db/dbtx"
 	"testing"
+
+	"platform/internal/pkg/db/dbtx"
 
 	"github.com/stretchr/testify/require"
 	"golang.org/x/text/language"

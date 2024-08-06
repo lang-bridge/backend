@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
-	"platform/internal/pkg/db/dbtx"
 	"testing"
 	"time"
+
+	"platform/internal/pkg/db/dbtx"
 
 	"github.com/getsentry/sentry-go"
 	"github.com/go-chi/chi/v5"

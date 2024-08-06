@@ -1,9 +1,11 @@
 package httputil
 
 import (
-	"github.com/google/uuid"
 	"log/slog"
 	"net/http"
+
+	"github.com/google/uuid"
+
 	"platform/internal/pkg/ctxlog"
 	"platform/internal/pkg/metactx"
 	"platform/internal/pkg/types"

@@ -3,8 +3,9 @@ package dblog
 import (
 	"context"
 	"log/slog"
-	"platform/internal/pkg/ctxlog"
 	"sort"
+
+	"platform/internal/pkg/ctxlog"
 
 	"github.com/jackc/pgx/v5/tracelog"
 )

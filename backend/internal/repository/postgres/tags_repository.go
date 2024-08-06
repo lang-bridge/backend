@@ -3,9 +3,10 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"strings"
+
 	"platform/internal/pkg/ctxlog"
 	"platform/internal/pkg/db/dbtx"
-	"strings"
 
 	"platform/internal/repository/postgres/gen"
 	"platform/internal/translations/entity/key"

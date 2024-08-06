@@ -3,6 +3,7 @@ package infra
 import (
 	"fmt"
 	"os"
+
 	"platform/internal/pkg/db/tx"
 
 	"github.com/getsentry/sentry-go"

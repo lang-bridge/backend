@@ -3,9 +3,10 @@ package fixture
 import (
 	"context"
 	"log/slog"
+	"testing"
+
 	"platform/internal/pkg/ctxlog"
 	"platform/internal/pkg/db/dbtx"
-	"testing"
 
 	"github.com/stretchr/testify/require"
 

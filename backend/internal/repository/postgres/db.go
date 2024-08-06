@@ -5,11 +5,12 @@ import (
 	"database/sql"
 	"fmt"
 	"log/slog"
+	"time"
+
 	"platform/internal/pkg/ctxlog"
 	"platform/internal/pkg/db/dblog"
 	"platform/internal/pkg/db/dbtx"
 	"platform/internal/pkg/db/tx"
-	"time"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"

@@ -2,9 +2,10 @@ package ctxlog
 
 import (
 	"context"
-	"github.com/samber/lo"
 	"log/slog"
 	"os"
+
+	"github.com/samber/lo"
 )
 
 type ctxMarker struct{}

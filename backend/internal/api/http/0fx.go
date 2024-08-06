@@ -3,6 +3,7 @@ package http
 import (
 	"context"
 	"log/slog"
+
 	"platform/internal/pkg/ctxlog"
 
 	"go.uber.org/fx"

@@ -2,12 +2,14 @@ package keys
 
 import (
 	"fmt"
-	"golang.org/x/text/language"
 	"net/http"
+	"strconv"
+
+	"golang.org/x/text/language"
+
 	"platform/internal/pkg/ctxlog"
 	"platform/internal/pkg/httputil"
 	"platform/internal/pkg/httputil/httperr"
-	"strconv"
 
 	"github.com/go-chi/chi/v5"
 
@@ -54,7 +56,7 @@ func (s *Router) CreateKey(w http.ResponseWriter, r *http.Request) error {
 		return httperr.BadRequest(fmt.Errorf("invalid request: %w", err))
 	}
 
-	var translate = make([]keys.Translate, len(req.Translates))
+	translate := make([]keys.Translate, len(req.Translates))
 	for i, tr := range req.Translates {
 		translate[i] = keys.Translate{
 			Language: tr.Language,

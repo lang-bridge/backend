@@ -3,9 +3,10 @@ package ctxlog
 import (
 	"bytes"
 	"context"
-	"github.com/stretchr/testify/require"
 	"log/slog"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestJSONLogger(t *testing.T) {
