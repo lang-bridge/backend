@@ -28,7 +28,7 @@ tasks:
   run-api:
     env:
       COMPOSE_POSTGRES_ENABLE: '1'
-#      COMPOSE_ORY_ENABLE: '1'
+      COMPOSE_ORY_ENABLE: '1'
       COMPOSE_API_ENABLE: '1'
     cmds:
       - ./scripts/docker-compose.sh

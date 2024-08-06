@@ -1,7 +1,7 @@
 - id: "api:protected"
   upstream:
     preserve_host: true
-    url: "http://hello:8090"
+    url: "http://api:8080"
   match:
     url: "http://127.0.0.1:8080/<**>"
     methods:
