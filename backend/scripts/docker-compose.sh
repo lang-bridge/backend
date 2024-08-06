@@ -36,5 +36,5 @@ fi
 
 echo "docker-compose ${COMPOSE_ARGS[@]} up"
 
-docker-compose "${COMPOSE_ARGS[@]}" down -v
+docker-compose "${COMPOSE_ARGS[@]}" down --remove-orphans
 docker-compose "${COMPOSE_ARGS[@]}" up --remove-orphans --build

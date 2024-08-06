@@ -3,7 +3,6 @@ package http
 import (
 	"context"
 	"log/slog"
-	"platform/internal/api/http/hello"
 	"platform/internal/pkg/ctxlog"
 
 	"go.uber.org/fx"
@@ -29,7 +28,6 @@ const groupTag = `group:"http_handlers"`
 
 var RoutersModule = fx.Provide(
 	fx.Annotate(keys.NewRouter, fx.As(new(Registerer)), fx.ResultTags(groupTag)),
-	fx.Annotate(hello.NewRouter, fx.As(new(Registerer)), fx.ResultTags(groupTag)),
 )
 
 // RunServer adds to lifecycle a new fx.Hook
