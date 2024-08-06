@@ -1,0 +1,10 @@
+services:
+  migrator:
+    container_name: "migrator-${COMPOSE_PROJECT_NAME}"
+    image: gomicro/goose:3.7.0
+    volumes:
+      - ./../../migrations:/migrations
+    command: "goose postgres \"host=postgres-${COMPOSE_PROJECT_NAME} user=postgres password=postgres dbname=langbridge sslmode=disable\" up"
+    depends_on:
+      postgres:
+        condition: service_healthy

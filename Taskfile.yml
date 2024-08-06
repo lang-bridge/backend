@@ -1,0 +1,10 @@
+version: '3'
+
+includes:
+  backend:
+    taskfile: ./backend/Taskfile.yml
+    dir: ./backend
+
+tasks:
+  default:
+    cmd: 'task --list-all'

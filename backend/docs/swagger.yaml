@@ -1,0 +1,85 @@
+definitions:
+  internal_api_http_keys.Translate:
+    properties:
+      language:
+        type: string
+      value:
+        type: string
+    type: object
+  key.Platform:
+    enum:
+    - WEB
+    - IOS
+    - ANDROID
+    - OTHER
+    type: string
+    x-enum-varnames:
+    - PlatformWeb
+    - PlatformIOS
+    - PlatformAndroid
+    - PlatformOther
+  keys.CreateKeyRequest:
+    properties:
+      existedTags:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      newTags:
+        items:
+          type: string
+        type: array
+      platforms:
+        items:
+          $ref: '#/definitions/key.Platform'
+        type: array
+      translates:
+        items:
+          $ref: '#/definitions/internal_api_http_keys.Translate'
+        type: array
+    type: object
+  keys.CreateKeyResponse:
+    properties:
+      key_id:
+        type: integer
+    type: object
+host: https://api.langbridge.io
+info:
+  contact:
+    email: support@langbridge.io
+    name: LangBridge Support
+    url: http://langbridge.io/support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: LangBridge API
+  version: "1.0"
+paths:
+  /api/v1/projects/{projectID}/keys:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        type: integer
+      - description: Create key request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/keys.CreateKeyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Created key
+          schema:
+            $ref: '#/definitions/keys.CreateKeyResponse'
+      summary: Create key with translates
+      tags:
+      - keys
+swagger: "2.0"
